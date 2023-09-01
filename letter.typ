@@ -1,4 +1,4 @@
-#import "awesomeCV/template.typ": *
+#import "./template.typ": *
 #show: layout
 #set text(size: 12pt) //set global font size
 
@@ -12,7 +12,8 @@
 
 Dear Hiring Manager,
 
-I am applying for the C++ Software Developer Co-op position at Safe Software. As a Computer Science student at UBC, I am passionate about programming and have experience in C++, making me eager to contribute to the FME Desktop/Engine development group at Safe Software.
+I am drawn to Safe Software's commitment to unleashing the power of data through FME. The diverse applications of FME, including handling sensors, maps, building models, imagery, databases, social media, web services, and more, resonate with my academic and project experience, particularly in Remote Sensing and GIS.
+As a Computer Science student at UBC, I am passionate about programming and have experience in C++, making me eager to contribute to the FME Desktop/Engine development group at Safe Software.
 
 My specific experience includes:
 
@@ -22,10 +23,6 @@ My specific experience includes:
 - Build and Test Tools: I have been using Linux for five years, and I am familiar with Git, Makefile, and Docker, which align with the tools used at Safe Software.
 - Databases: My projects have exposed me to the use and management of relational databases, including SQLite3, which will allow me to work with databases mentioned in the job description.
 - Team Collaboration: My work on course projects such as UBCInsight Software Project showcases my ability to collaborate within a team, apply software engineering principles, and conduct iterative development and efficient project management.
-
-I am drawn to Safe Software's commitment to unleashing the power of data through FME. The diverse applications of FME, including handling sensors, maps, building models, imagery, databases, social media, web services, and more, resonate with my academic and project experience, particularly in Remote Sensing and GIS.
-
-Safe Software's collaboration with clients like Microsoft, Oracle, and Natural Resources Canada further motivates me to be part of your organization. I am eager to contribute my skills, learn from the seasoned professionals at Safe Software, and make a significant impact by extending the reach of FME technology.
 
 Eager to contribute, learn, and make an impact, I thank you for considering my application. I look forward to discussing how my skills align with your needs.
 
