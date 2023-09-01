@@ -1,6 +1,85 @@
+#import "./metadata.typ": *
+#import "@preview/fontawesome:0.1.0": *
+
 // const color
+#let awesomeColors = (
+  skyblue: rgb("#0395DE"),
+  red: rgb("#DC3522"),
+  nephritis: rgb("#27AE60"),
+  concrete: rgb("#95A5A6"),
+  darknight: rgb("#131A28"),
+)
+
+#let regularColors = (
+  lightgray: rgb("#343a40"),
+  darkgray: rgb("#212529"),
+)
+
 #let color_darknight = rgb("#131A28")
 #let color_darkgray = rgb("333333")
+#let accentColor = awesomeColors.at(awesomeColor)
+
+/*************** Styles ***************/
+#let beforeSectionSkip = 1pt
+#let beforeEntrySkip = 1pt
+#let beforeEntryDescriptionSkip = 1pt
+
+#let entryA1Style(str) = {text(
+  size: 10pt, weight: "bold",
+  str
+)}
+
+#let entryA2Style(str) = {align(right, text(
+  weight: "medium", fill: accentColor, style: "oblique",
+  str
+))}
+
+#let entryB1Style(str) = {text(
+  size: 9pt, fill: accentColor, weight: "medium",
+  smallcaps(str)
+)}
+
+#let entryB2Style(str) = {align(right, text(
+  size: 11pt, weight: "medium", fill: gray, style: "oblique",
+  str
+))}
+
+#let entryDescriptionStyle(str) = {text(
+  size: 10pt, fill: regularColors.lightgray,
+  {
+    v(beforeEntryDescriptionSkip)
+    str
+  }
+)}
+
+#let letterHeaderNameStyle(str) = {text(
+  weight: "bold",
+  str
+)}
+
+#let letterHeaderAddressStyle(str) = {text(
+  fill: gray,
+  size: 0.9em,
+  smallcaps(str)
+)}
+
+#let letterDateStyle(str) = {text(
+  size: 0.9em,
+  style: "italic",
+  str
+)}
+
+#let letterSubjectStyle(str) = {text(
+  fill: accentColor,
+  weight: "bold",
+  underline(str)
+)}
+
+#let footerStyle(str) = {text(
+  size: 8pt,
+  fill: rgb("#999999"),
+  smallcaps(str)
+)}
 
 // layout utility
 #let justify_align(left_body, right_body) = {
@@ -34,6 +113,12 @@
   ]
 }
 
+#let letterSignature(path) = {
+  linebreak()
+  place(left, dx:-5%, dy:0%, image(path, width: 25%))
+}
+
+/*************** Main Body Items ***************/
 #let resume(author: (), date: "", body) = {
   
   set document(
@@ -55,7 +140,7 @@
     footer: [
       #set text(fill: gray, size: 9pt)
       #justify_align_3[
-        #smallcaps[#date]
+        // #smallcaps[#date]
       ][
         #smallcaps[
           #author.firstname
@@ -83,7 +168,7 @@
     align(center)[
       #pad(bottom: 5pt)[
         #block[
-          #set text(size: 32pt, style: "normal", font: ("Roboto"))
+          #set text(size: 28pt, style: "normal", font: ("Vollkorn"))
           #text(weight: "thin")[#author.firstname]
           #text(weight: "bold")[#author.lastname]
         ]
@@ -135,6 +220,8 @@
     ] 
   }
 
+  align(right)[#box[#image("./assets/Coop.svg", width:70%)]]
+
   name
   positions
   contacts
@@ -163,7 +250,7 @@
 }
 
 #let resume_time(body) = {
-  set text(weight: "light", style: "italic", size: 9pt)
+  set text(weight: "medium", style: "oblique", size: 12pt, fill: accentColor)
   body
 }
 
@@ -178,7 +265,7 @@
 }
 
 #let resume_location(body) = {
-  set text(size: 12pt, style: "italic", weight: "light")
+  set text(size: 11pt, style: "italic", fill: gray, weight: "light")
   body
 }
 
@@ -215,6 +302,62 @@
   ]
 }
 
+#let cvSection(title) = {
+  let highlightText = title.slice(0,3)
+  let normalText = title.slice(3)
+
+  v(beforeSectionSkip)
+  sectionTitleStyle(highlightText, color: accentColor)
+  sectionTitleStyle(normalText, color: black)
+  h(2pt)
+  box(width: 1fr, line(stroke: 0.9pt, length: 100%))
+}
+
+#let cvEntry(
+  title: "Title",
+  society: "Society",
+  date: "Date",
+  location: "Location",
+  description: "Description",
+  logo: ""
+) = {
+  let ifSocietyFirst(condition, field1, field2) = {
+    return if condition {field1} else {field2}
+  }
+  let ifLogo(path, ifTrue, ifFalse) = {
+    return if varDisplayLogo {
+      if path == "" { ifFalse } else { ifTrue }
+    } else { ifFalse }
+  }
+  let setLogoLength(path) = {
+    return if path == "" { 0% } else { 4% }
+  }
+  let setLogoContent(path) = {
+    return if logo == "" [] else {image(path, width: 100%)}
+  }
+  v(beforeEntrySkip)
+  table(
+    columns: (ifLogo(logo, 4%, 0%), 1fr),
+    inset: 0pt,
+    stroke: none,
+    align: horizon,
+    column-gutter: ifLogo(logo, 4pt, 0pt),
+    setLogoContent(logo),
+    table(
+      columns: (1fr, auto),
+      inset: 0pt,
+      stroke: none,
+      row-gutter: 6pt,
+      align: auto,
+      {entryA1Style(ifSocietyFirst(varEntrySocietyFirst, society, title))},
+      {resume_time(date)},
+      {entryB1Style(ifSocietyFirst(varEntrySocietyFirst, title, society))},
+      {entryB2Style(location)},
+    )
+  )
+  entryDescriptionStyle(description)
+}
+
 #let work_experience_item_header(
   company,
   location,
@@ -249,12 +392,12 @@
     #justify_align[
       #resume_organization[#name]
     ][
-      #resume_location[#location]
+      #resume_time[#start_time]
     ]
     #justify_align[
       #resume_position[#position]
     ][
-      #resume_time[#start_time]
+      #resume_location[#location]
     ]
   ]
 }
@@ -272,5 +415,80 @@
       #set text(size: 11pt, style: "normal", weight: "light")
       #items.join(", ")
     ],
+  )
+}
+
+#let volunteer_item_header(
+  position,
+  company,
+  location,
+  time_frame
+) = {
+  set block(above: 0.7em, below: 0.7em)
+  set pad(top: 5pt)
+  pad[
+    #justify_align[
+      #resume_organization[#company]
+    ][
+      #resume_time[#time_frame]
+    ]
+    #justify_align[
+      #resume_position[#position]
+    ][
+      #resume_location[#location]
+    ]
+  ]
+}
+
+#let layout(doc) = {
+  set text(
+    font: ("Vollkorn", "Font Awesome 6 Brands", "Font Awesome 6 Free"),
+    weight: "regular",
+    size: 9pt,
+  )
+  set align(left)
+  set page(
+    paper: "a4",
+    margin: (
+      left: 1.4cm,
+      right: 1.4cm,
+      top: .8cm,
+      bottom: .4cm,
+    ),
+  )
+  doc
+}
+
+#let letterHeader(
+  myAddress: "Your Address Here",
+  recipientName: "Company Name Here",
+  recipientAddress: "Company Address Here",
+  date: "Today's Date",
+  subject: "Subject: Hey!"
+) = {
+  letterHeaderNameStyle(firstName + " " + lastName)
+  v(1pt)
+  letterHeaderAddressStyle(myAddress)
+  v(1pt)
+  align(right, letterHeaderNameStyle(recipientName))
+  v(1pt)
+  align(right, letterHeaderAddressStyle(recipientAddress))
+  v(1pt)
+  letterDateStyle(date)
+  v(1pt)
+  letterSubjectStyle(subject)
+  linebreak(); linebreak()
+}
+
+#let letterFooter() = {
+  place(
+    bottom,
+    table(
+      columns: (1fr, auto),
+      inset: 0pt,
+      stroke: none,
+      footerStyle([#firstName #lastName]),
+      footerStyle([Cover Letter]),
+    )
   )
 }
