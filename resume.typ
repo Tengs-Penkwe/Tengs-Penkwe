@@ -1,5 +1,4 @@
 #import "template.typ": *
-// #import "awesomeCV/template.typ": *
 
 #show: resume.with(
   author: (
@@ -9,38 +8,61 @@
       phone: "236 308 6684",
       github: "Tengs-Penkwe",
       linkedin: "tengs-wu",
-      positions: (
-        //"President of USA",
-        //"United Nations Secretary-General",
-      )
+      positions: ()
   ),
   date:  datetime.today().display()
 )
 
-#resume_section("Education")
+#resume_section("Skills")
 
-#cvEntry(
-    title: [B.E. in Geo-informatics],
-    society: [China University of Geosciences],
-    date: [Sept. 2019 - June. 2022],
-    location: [Wuhan, China],
-    logo: "./assets/CUG.svg",
-    description: list(
-      [Thesis: Flood Disaster Monitoring Based on Landsat-8 and Sentinel-1 Imagery - A Case Study of Dongting Lake],
-      //[Course: Big Data Systems and Technologies #hBar() Data Mining and Exploration #hBar() Natural Language Processing]
-    )
+// #skill_item(
+//   "Geology",
+//   ("Stratigraphy",
+//    "Paleontology",
+//    "Hydrology",
+//  )
+// )
+#skill_item(
+  "Language",
+  (
+    strong[C/C++],
+    strong[JavaScript], 
+    strong[TypeScript], 
+    strong[Verilog],
+    strong[Java],
+    "Rust", 
+    "Haskell", 
+    "Prolog",
+    "Assembly"
+  )
 )
 
-#cvEntry(
-    title: [B.S. in Computer Science],
-    society: [University of British Columbia],
-    date: [Sept. 2022 - Expected Aug 2025],
-    location: [Vancouver, Canada],
-    logo: "./assets/UBC_COA.svg",
-    //resume_gpa: ["4.00", "4.00"],
-    description: list(
-      // Additional details can be added here, such as relevant courses or projects
-    )
+#skill_item(
+  "OS",
+  (
+    strong[Linux], 
+    "Shell Scripting",
+    "Systemd",
+    "Makefile", 
+    "Compiling",
+    "Git",
+    "Docker",
+  )
+)
+
+#skill_item(
+  "Remote-Sensing",
+  (strong[Image Processing/Analysis],
+  )
+)
+
+#skill_item(
+  "Geo-Informatics",
+  ( "GIS",
+   "Disaster Monitoring/Prediction",
+   "City Planning",
+   "Mapping",
+ )
 )
 
 
@@ -99,6 +121,21 @@
   - Utilized GIS and RS software for thorough analysis of Remote Sensing (RS) and diverse source data, extracting valuable insights for improved understanding and actionable analyses.
 ]
 
+
+#personal_project_item_header(
+  "OpenMIPS CPU",
+  "",
+  "Personal Project",
+  "Mar 2021 - Apr 2023",
+)
+
+#resume_item[
+  - Created a openMIPS CPU using Verilog to deepen understanding of CPU architectures.
+  - Worked through various tests to verify the functionality and correctness of the CPU design.
+  - Made use of scripts and makefiles to streamline the project build and testing process, saving time and effort.
+  - Ensured the project's reliability through detailed testing using Verilog testbenches, helping to catch and fix errors early in the development process.
+]
+
 #personal_project_item_header(
   "UBCInsight Software Project",
   "University of British Columbia",
@@ -129,59 +166,29 @@
   - Integrated PHP scripts to perform query operations like creating, adding, dropping, and updating data
 ]
 
-#pagebreak()
-#resume_section("Skills")
+#resume_section("Education")
 
-#skill_item(
-  "Language",
-  (
-    strong[C/C++],
-    strong[JavaScript], 
-    strong[TypeScript], 
-    strong[Verilog],
-    strong[Java],
-    "Rust", 
-    "Haskell", 
-    "Prolog",
-    "Assembly"
-  )
+#cvEntry(
+    title: [B.E. in Geo-informatics],
+    society: [China University of Geosciences],
+    date: [Sept. 2019 - June. 2022],
+    location: [Wuhan, China],
+    logo: "./assets/CUG.svg",
+    description: list(
+      [Thesis: Flood Disaster Monitoring Based on Landsat-8 and Sentinel-1 Imagery - A Case Study of Dongting Lake],
+    )
 )
 
-#skill_item(
-  "OS",
-  (
-    strong[Linux], 
-    "Shell Scripting",
-    "Systemd",
-    "Makefile", 
-    "Compiling",
-    "Git",
-    "Docker",
-  )
+#cvEntry(
+    title: [B.S. in Computer Science],
+    society: [University of British Columbia],
+    date: [Sept. 2022 - Expected Aug 2025],
+    location: [Vancouver, Canada],
+    logo: "./assets/UBC_COA.svg",
+    description: list(
+      // Additional details can be added here, such as relevant courses or projects
+    )
 )
-
-#skill_item(
-  "Remote-Sensing",
-  (strong[Image Processing/Analysis],
-  )
-)
-
-#skill_item(
-  "Geo-Informatics",
-  ( "GIS",
-   "Disaster Monitoring/Prediction",
-   "City Planning",
-   "Mapping",
- )
-)
-
-// #skill_item(
-//   "Geology",
-//   ("Stratigraphy",
-//    "Paleontology",
-//    "Hydrology",
-//  )
-// )
 
 #resume_section("Volunteer")
 
@@ -213,7 +220,7 @@
   "Volunteer",
   "Various Volunteer Roles",
   "Wuhan, China",
-  "June 2022 - Sept 2020"
+  "June 2022 - Sept 2022"
 )
 
 #resume_item[
@@ -226,7 +233,7 @@
   "Volunteer",
   "UBC Chinese Language Program",
   "Vancouver, BC",
-  "Sept. 2022 - Dec. 2022"
+  "Sept 2022 - Dec 2022"
 )
 
 #resume_item[
@@ -238,7 +245,7 @@
   "Volunteer",
   "UBC Vancouver's Move-In Day",
   "Vancouver, BC",
-  "Aug. 2023 - Sept. 2023"
+  "Aug 2023 - Sept 2023"
 )
 
 #resume_item[
@@ -250,7 +257,7 @@
   "Community Volunteer",
   "Saint Mark's Church",
   "Vancouver, BC",
-  "Aug. 2023 - Spet. 2023"
+  "Aug 2023 - Sept 2023"
 )
 
 #resume_item[
